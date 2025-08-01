@@ -19,6 +19,8 @@ class CouponTest {
         Coupon coupon = Coupon.builder()
                 .totalQuantity(100)
                 .issuedQuantity(99)
+                .discountAmount(1)
+                .minAvailableAmount(1)
                 .build();
         // when
         boolean result = coupon.availableIssueQuantity();
