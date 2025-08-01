@@ -9,7 +9,7 @@ import static com.example.couponcore.model.QCouponIssue.couponIssue;
 
 @RequiredArgsConstructor
 @Repository
-public class CouponIssueRepository {
+public class CouponIssueQueryDslRepository {
 
     private final JPQLQueryFactory queryFactory;
 

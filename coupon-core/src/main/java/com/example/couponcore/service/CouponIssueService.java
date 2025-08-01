@@ -5,7 +5,7 @@ import com.example.couponcore.model.Coupon;
 import com.example.couponcore.model.CouponIssue;
 import com.example.couponcore.model.event.CouponIssueCompleteEvent;
 import com.example.couponcore.repository.mysql.CouponIssueJpaRepository;
-import com.example.couponcore.repository.mysql.CouponIssueRepository;
+import com.example.couponcore.repository.mysql.CouponIssueQueryDslRepository;
 import com.example.couponcore.repository.mysql.CouponJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -21,7 +21,7 @@ public class CouponIssueService {
 
     private final CouponJpaRepository couponJpaRepository;
     private final CouponIssueJpaRepository couponIssueJpaRepository;
-    private final CouponIssueRepository couponIssueRepository;
+    private final CouponIssueQueryDslRepository couponIssueQueryDslRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
@@ -57,7 +57,7 @@ public class CouponIssueService {
     }
 
     private void checkAlreadyIssuance(long couponId, long userId) {
-        CouponIssue issue = couponIssueRepository.findFirstCouponIssue(couponId, userId);
+        CouponIssue issue = couponIssueQueryDslRepository.findFirstCouponIssue(couponId, userId);
         if (issue != null) {
             throw new CouponIssueException(DUPLICATED_COUPON_ISSUE, "이미 발급된 쿠폰입니다. user_id: %d, coupon_id: %d".formatted(userId, couponId));
         }

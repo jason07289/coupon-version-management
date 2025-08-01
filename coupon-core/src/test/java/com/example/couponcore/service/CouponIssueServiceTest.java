@@ -7,7 +7,7 @@ import com.example.couponcore.model.Coupon;
 import com.example.couponcore.model.CouponIssue;
 import com.example.couponcore.model.CouponType;
 import com.example.couponcore.repository.mysql.CouponIssueJpaRepository;
-import com.example.couponcore.repository.mysql.CouponIssueRepository;
+import com.example.couponcore.repository.mysql.CouponIssueQueryDslRepository;
 import com.example.couponcore.repository.mysql.CouponJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ class CouponIssueServiceTest extends TestConfig {
     CouponIssueJpaRepository couponIssueJpaRepository;
 
     @Autowired
-    CouponIssueRepository couponIssueRepository;
+    CouponIssueQueryDslRepository couponIssueQueryDslRepository;
 
     @Autowired
     CouponJpaRepository couponJpaRepository;
@@ -87,7 +87,7 @@ class CouponIssueServiceTest extends TestConfig {
         Coupon couponResult = couponJpaRepository.findById(coupon.getId()).get();
         Assertions.assertEquals(couponResult.getIssuedQuantity(), 1);
 
-        CouponIssue couponIssueResult = couponIssueRepository.findFirstCouponIssue(coupon.getId(), userId);
+        CouponIssue couponIssueResult = couponIssueQueryDslRepository.findFirstCouponIssue(coupon.getId(), userId);
         Assertions.assertNotNull(couponIssueResult);
     }
 
